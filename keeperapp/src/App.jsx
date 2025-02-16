@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
@@ -6,6 +6,10 @@ import CreateArea from "./CreateArea";
 import "./App.css";
 
 function App() {
+
+
+
+
   const [noteContent, setNoteContent] = useState("");
   const [noteTitle, setNoteTitle] = useState("");
 
@@ -29,6 +33,11 @@ function App() {
     setNoteContent("");
   }
 
+  function deleteNote(id) {
+    setNotes(previousNotes => previousNotes.filter((_, index) => index !== id));
+  }
+
+
   return (
     <div>
       <Header />
@@ -40,7 +49,7 @@ function App() {
         noteContent={noteContent}
       />
       {notes.map((noteItem, index) => (
-        <Note key={index} id={index} title={noteItem.title} content={noteItem.content} />
+        <Note key={index} id={index} title={noteItem.title} content={noteItem.content} deleteNoteFunction={deleteNote} />
       ))}
       <Footer />
     </div>
