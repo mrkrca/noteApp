@@ -5,6 +5,7 @@ import Note from "./Note";
 import CreateArea from "./CreateArea";
 import "./App.css";
 
+
 function App() {
 
 
@@ -23,14 +24,19 @@ function App() {
     setNoteContent(event.target.value);
   }
 
+
   function handleClick(event) {
     event.preventDefault();
-    setNotes((previousNotes) => [
-      ...previousNotes,
-      { title: noteTitle, content: noteContent }
-    ]);
-    setNoteTitle("");
-    setNoteContent("");
+    if (noteTitle.trim() && noteContent.trim()) {
+      setNotes((previousNotes) => [
+        ...previousNotes,
+        { title: noteTitle, content: noteContent }
+      ]);
+      setNoteTitle("");
+      setNoteContent("");
+    } else {
+      alert("Both title and content are required.");
+    }
   }
 
   function deleteNote(id) {
@@ -38,8 +44,11 @@ function App() {
   }
 
 
+
+
   return (
     <div>
+    
       <Header />
       <CreateArea
         onChangeTitleFunction={handleTitleInput}
